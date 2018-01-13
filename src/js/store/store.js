@@ -9,12 +9,4 @@ const rootReducer = combineReducers({
     async: asyncReducer
 });
 
-function configureStore(preloadedState) {
-    return createStore(
-        rootReducer,
-        preloadedState,
-        applyMiddleware(thunkMiddleware)
-    );
-}
-
-export default configureStore();
+export default createStore(rootReducer, {}, applyMiddleware(thunkMiddleware));

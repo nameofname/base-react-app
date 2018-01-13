@@ -1,3 +1,5 @@
+import fetch from 'cross-fetch';
+
 export const UPDATE_TEXT = 'UPDATE_TEXT';
 export function updateText(payload) {
     return { type: UPDATE_TEXT, payload };
@@ -13,8 +15,8 @@ export function dataReceived(data) {
     return { type: DATA_RECEIVED, payload: data };
 }
 
-export const FETCH_POLITICS = 'FETCH_POLITICS';
-export function fetchPolitics(subreddit) {
+// export const FETCH_POLITICS = 'FETCH_POLITICS';
+export function fetchPolitics() {
     return dispatch => {
         dispatch(dataLoading());
         return fetch(`https://www.reddit.com/r/politics.json`)

@@ -10,7 +10,7 @@ class Body extends Component {
 
     fetchApi() {
         console.log('this is me fetching');
-        fetchPolitics();
+        this.props.fetchPolitics();
     }
 
     render() {
@@ -31,6 +31,6 @@ class Body extends Component {
     }
 }
 
-export default connect(({ ui: { text }, async: { data } }) => ({ text, data }))(
-    Body
-);
+const mapStateToProps = ({ ui: { text }, async: { data } }) => ({ text, data });
+const mapDispatchToProps = { fetchPolitics };
+export default connect(mapStateToProps, mapDispatchToProps)(Body);
