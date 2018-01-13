@@ -8,8 +8,10 @@
     "prettier": "^1.10.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
     "react-scripts": "1.0.17",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
@@ -20,6 +22,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "prettier": "./node_modules/.bin/prettier --tab-width 4 --single-quote --write \"src/**/*.{js,jsx}\"",
+    "server": "node server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
