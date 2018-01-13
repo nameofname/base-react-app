@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchPolitics } from '../store/actions';
 
 class Body extends Component {
     constructor() {
@@ -8,22 +9,27 @@ class Body extends Component {
     }
 
     fetchApi() {
-        console.log('this is me fetching.');
+        fetchPolitics();
     }
 
     render() {
         const { fetchApi } = this;
-        const { text } = this.props;
+        const { text, data } = this.props;
         return (
-            <div>
-                <div className="app-body">
-                    This is the inside of your thing.
-                </div>
+            <div className="app-body">
+                <div>This is the inside of your thing.</div>
+                <p>Here's an arbitrary bit of text from the store :</p>
                 <p>{text}</p>
+                <p>And here's some data that I keep in my store as well :</p>
+                {data.map(str => {
+                    return <p>{str}</p>;
+                })}
                 <button onClick={fetchApi}>Click it.</button>
             </div>
         );
     }
 }
 
-export default connect(({ ui: { text } }) => ({ text }))(Body);
+export default connect(({ ui: { text }, async: { data } }) => ({ text, data }))(
+    Body
+);

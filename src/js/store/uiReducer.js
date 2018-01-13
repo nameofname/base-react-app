@@ -4,7 +4,7 @@ const defaultState = {
     text: 'state from redux'
 };
 
-export default function uiActions(state = defaultState, action) {
+export default function uiReducer(state = defaultState, action) {
     switch (action.type) {
         case UPDATE_TEXT:
             return Object.assign({}, state, { text: action.payload });

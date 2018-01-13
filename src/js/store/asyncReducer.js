@@ -1,9 +1,16 @@
-import { UPDATE_TEXT } from './actions';
+import { FETCH_POLITICS } from './actions';
 
-const defaultState = {};
+const defaultState = {
+    data: ['no data']
+};
 
-export default function uiActions(state = defaultState, action) {
+export default function uiReducer(state = defaultState, action) {
     switch (action.type) {
+        case FETCH_POLITICS:
+            return Object.assign({}, state, {
+                data: ['loading']
+            });
+
         default:
             return state;
     }
