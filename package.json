@@ -18,6 +18,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
+    "prettier": "./node_modules/.bin/prettier  --tab-width 4 --single-quote --write \"src/**/*.{js,jsx}\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
