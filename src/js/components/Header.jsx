@@ -30,21 +30,21 @@ class Header extends Component {
 
     render() {
         return (
-            <header className="App-header">
+            <header className="app-header">
                 <img
                     ref={l => (this.svgs.lightning = l)}
                     src={lightning}
-                    className="App-logo lightning"
+                    className="app-logo lightning"
                     alt="lightning"
                     style={{ display: 'none' }}
                 />
                 <img
                     ref={w => (this.svgs.wink = w)}
                     src={wink}
-                    className="App-logo wink"
+                    className="app-logo wink"
                     alt="wink"
                 />
-                <h1 className="App-title">
+                <h1 className="app-title">
                     Welcome to you, looking at this page.
                 </h1>
             </header>
