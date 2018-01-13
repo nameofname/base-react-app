@@ -9,6 +9,7 @@ class Body extends Component {
     }
 
     fetchApi() {
+        console.log('this is me fetching');
         fetchPolitics();
     }
 
@@ -21,8 +22,8 @@ class Body extends Component {
                 <p>Here's an arbitrary bit of text from the store :</p>
                 <p>{text}</p>
                 <p>And here's some data that I keep in my store as well :</p>
-                {data.map(str => {
-                    return <p>{str}</p>;
+                {data.map((str, idx) => {
+                    return <p key={idx}>{str}</p>;
                 })}
                 <button onClick={fetchApi}>Click it.</button>
             </div>

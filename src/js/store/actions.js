@@ -3,12 +3,12 @@ export function updateText(payload) {
     return { type: UPDATE_TEXT, payload };
 }
 
-export const DATA_LOADING = DATA_LOADING;
+export const DATA_LOADING = 'DATA_LOADING';
 export function dataLoading() {
     return { type: DATA_LOADING };
 }
 
-export const DATA_RECEIVED = DATA_RECEIVED;
+export const DATA_RECEIVED = 'DATA_RECEIVED';
 export function dataReceived(data) {
     return { type: DATA_RECEIVED, payload: data };
 }
