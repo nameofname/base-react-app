@@ -7,3 +7,7 @@ Questions to answer ;
 - do I like this service worker thing? Or should I just create a really simple express app ? 
 - how about redux ? 
 - what about fetching data? 
+
+
+SVG files downloaded from here : 
+https://www.flaticon.com
