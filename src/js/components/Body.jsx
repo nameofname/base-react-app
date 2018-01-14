@@ -1,55 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPolitics } from '../store/actions';
+import { fetchTickers, fetchCorrelations } from '../store/actions';
 import router from '../router';
 
 class Body extends Component {
     constructor() {
         super();
-        this.fetchApi = this.fetchApi.bind(this);
+        this.fetchTickers = this.fetchTickers.bind(this);
+        this.fetchCorrelations = this.fetchCorrelations.bind(this);
     }
 
-    fetchApi() {
-        this.props.fetchPolitics();
+    fetchTickers() {
+        this.props.fetchTickers();
+    }
+
+    fetchCorrelations() {
+        // TODO ! connect to input.
+        this.props.fetchCorrelations(['AAPL', 'MSFT']);
     }
 
     render() {
-        const { fetchApi } = this;
-        const { text, data } = this.props;
+        const { fetchTickers, fetchCorrelations } = this;
+        const { data } = this.props;
         return (
             <div className="app-body">
                 <p>
                     Welcome to my base react app. Everything is all set up for
                     you to start coding.
                 </p>
-                <p>Here are a few links in the sample router :</p>
-                <div className="sample-links">
-                    <p>
-                        <a
-                            href="/one"
-                            onClick={e => {
-                                e.preventDefault();
-                                router.resolve({ pathname: '/one' });
-                            }}
-                        >
-                            Link one
-                        </a>
-                        <a
-                            href="/two"
-                            onClick={e => {
-                                e.preventDefault();
-                                router.resolve({ pathname: '/two' });
-                            }}
-                        >
-                            Link two
-                        </a>
-                    </p>
-                </div>
-                <p>Here's an arbitrary bit of text from the store :</p>
-                <div className="redux-data">
-                    <p>{text}</p>
-                </div>
-                <p>And here's some API data I also keep in redux :</p>
+                <p>Choose from the following list of tickers</p>
                 <div className="fetch-data">
                     {data.map(({ title, link }, idx) => {
                         return (
@@ -59,12 +38,11 @@ class Body extends Component {
                         );
                     })}
                 </div>
-                <button onClick={fetchApi}>Click to fetch data.</button>
             </div>
         );
     }
 }
 
-const mapStateToProps = ({ ui: { text }, async: { data } }) => ({ text, data });
-const mapDispatchToProps = { fetchPolitics };
+const mapStateToProps = ({ async: { data } }) => ({ data });
+const mapDispatchToProps = { fetchTickers, fetchCorrelations };
 export default connect(mapStateToProps, mapDispatchToProps)(Body);

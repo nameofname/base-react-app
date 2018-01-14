@@ -1,10 +1,5 @@
 import fetch from 'cross-fetch';
 
-export const UPDATE_TEXT = 'UPDATE_TEXT';
-export function updateText(payload) {
-    return { type: UPDATE_TEXT, payload };
-}
-
 export const DATA_LOADING = 'DATA_LOADING';
 export function dataLoading() {
     return { type: DATA_LOADING };
@@ -15,11 +10,28 @@ export function dataReceived(data) {
     return { type: DATA_RECEIVED, payload: data };
 }
 
-// export const FETCH_POLITICS = 'FETCH_POLITICS';
-export function fetchPolitics() {
+// TODO!!!!!!!! - implement error handling.
+export const DATA_ERROR = 'DATA_ERROR';
+export function dataError(data) {
+    return { type: DATA_ERROR };
+}
+
+export function fetchTickers() {
     return dispatch => {
         dispatch(dataLoading());
-        return fetch(`https://www.reddit.com/r/politics.json`)
+        return fetch(`http://k-fe-practical.herokuapp.com/api/tickers/`)
+            .then(response => response.json())
+            .then(json => dispatch(dataReceived(json)));
+    };
+}
+
+export function fetchCorrelations(tickerArr) {
+    return dispatch => {
+        dispatch(dataLoading());
+        const queryString = tickerArr.map(str => `tickers=${str}`).join('&');
+        return fetch(
+            `http://k-fe-practical.herokuapp.com/api/correlation/?${queryString}`
+        )
             .then(response => response.json())
             .then(json => dispatch(dataReceived(json)));
     };

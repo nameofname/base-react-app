@@ -13,14 +13,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 https://bundlephobia.com
 
-## Questions to answer ; 
+## TODO :  
 
-??? - what should i use for routing
-- please try out code splitting with import statement
-X - how about redux ? 
-X - what about fetching data?
-X - what if i have to use graphql? 
-
+- create api integration
+- create visualization - what kind of graphing could i use to represent this information, if any? 
+- implement code splitting time permitting.
 
 SVG files downloaded from here : 
 https://www.flaticon.com
