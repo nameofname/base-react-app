@@ -29,7 +29,7 @@ class Body extends Component {
                             href="/one"
                             onClick={e => {
                                 e.preventDefault();
-                                router.resove({ pathname: '/one' });
+                                router.resolve({ pathname: '/one' });
                             }}
                         >
                             Link one
@@ -38,7 +38,7 @@ class Body extends Component {
                             href="/two"
                             onClick={e => {
                                 e.preventDefault();
-                                router.resove({ pathname: '/two' });
+                                router.resolve({ pathname: '/two' });
                             }}
                         >
                             Link two
