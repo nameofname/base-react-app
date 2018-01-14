@@ -27,9 +27,9 @@ class Body extends Component {
                 </div>
                 <p>And here's some API data I also keep in redux :</p>
                 <div className="fetch-data">
-                    {data.map(({ title, permalink }, idx) => {
+                    {data.map(({ title, link }, idx) => {
                         return (
-                            <a href={`http://reddit.com/${permalink}`}>
+                            <a href={link}>
                                 <p key={idx}>{title}</p>
                             </a>
                         );

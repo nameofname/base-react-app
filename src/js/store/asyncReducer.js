@@ -2,7 +2,7 @@ import { DATA_LOADING, DATA_RECEIVED } from './actions';
 import get from 'lodash.get';
 
 const defaultState = {
-    data: ['no data']
+    data: [{ title: 'No Data', link: '/' }]
 };
 
 export default function uiReducer(state = defaultState, action) {
@@ -16,7 +16,10 @@ export default function uiReducer(state = defaultState, action) {
             const dataArr = get(action.payload, 'data.children', []);
             return Object.assign({}, state, {
                 data: dataArr.map(o => {
-                    return get(o, 'data', 'no message.');
+                    const obj = get(o, 'data', {});
+                    return Object.assign(obj, {
+                        link: `http://reddit.com/${obj.permalink}`
+                    });
                 })
             });
 
