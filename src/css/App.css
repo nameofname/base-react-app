@@ -19,3 +19,9 @@
 .app-intro {
     font-size: large;
 }
+
+.fetch-data,
+.redux-data {
+    padding: 10px;
+    background-color: #f7f7f7;
+}

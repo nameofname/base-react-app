@@ -9,7 +9,6 @@ class Body extends Component {
     }
 
     fetchApi() {
-        console.log('this is me fetching');
         this.props.fetchPolitics();
     }
 
@@ -18,14 +17,25 @@ class Body extends Component {
         const { text, data } = this.props;
         return (
             <div className="app-body">
-                <div>This is the inside of your thing.</div>
+                <p>
+                    Welcome to my base react app. Everything is all set up for
+                    you to start coding.
+                </p>
                 <p>Here's an arbitrary bit of text from the store :</p>
-                <p>{text}</p>
-                <p>And here's some data that I keep in my store as well :</p>
-                {data.map((str, idx) => {
-                    return <p key={idx}>{str}</p>;
-                })}
-                <button onClick={fetchApi}>Click it.</button>
+                <div className="redux-data">
+                    <p>{text}</p>
+                </div>
+                <p>And here's some API data I also keep in redux :</p>
+                <div className="fetch-data">
+                    {data.map(({ title, permalink }, idx) => {
+                        return (
+                            <a href={`http://reddit.com/${permalink}`}>
+                                <p key={idx}>{title}</p>
+                            </a>
+                        );
+                    })}
+                </div>
+                <button onClick={fetchApi}>Click to fetch data.</button>
             </div>
         );
     }

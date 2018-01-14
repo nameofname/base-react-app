@@ -16,7 +16,7 @@ export default function uiReducer(state = defaultState, action) {
             const dataArr = get(action.payload, 'data.children', []);
             return Object.assign({}, state, {
                 data: dataArr.map(o => {
-                    return get(o, 'data.selftext', 'no message.');
+                    return get(o, 'data', 'no message.');
                 })
             });
 

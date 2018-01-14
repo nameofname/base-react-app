@@ -1,4 +1,5 @@
-import UniversalRouter from 'universal-router';
+// use main.js to work around https://github.com/kriasoft/universal-router/issues/127
+import UniversalRouter from 'universal-router/main.js';
 
 const routes = [
     { path: '/one', action: () => 'this is the first route' },
