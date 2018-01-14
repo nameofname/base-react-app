@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchTickers, fetchCorrelations } from '../store/actions';
-import router from '../router';
+// import router from '../router';
 
 class Body extends Component {
     constructor() {
         super();
         this.fetchTickers = this.fetchTickers.bind(this);
         this.fetchCorrelations = this.fetchCorrelations.bind(this);
+    }
+
+    componentDidMount() {
+        this.fetchTickers();
     }
 
     fetchTickers() {
@@ -20,8 +24,8 @@ class Body extends Component {
     }
 
     render() {
-        const { fetchTickers, fetchCorrelations } = this;
-        const { data } = this.props;
+        const { fetchCorrelations } = this;
+        const { tickers, correlations } = this.props;
         return (
             <div className="app-body">
                 <p>
@@ -29,20 +33,16 @@ class Body extends Component {
                     you to start coding.
                 </p>
                 <p>Choose from the following list of tickers</p>
-                <div className="fetch-data">
-                    {data.map(({ title, link }, idx) => {
-                        return (
-                            <a key={idx} href={link}>
-                                <p>{title}</p>
-                            </a>
-                        );
-                    })}
-                </div>
+                <div>{tickers.map(ticker => <p>{ticker}</p>)}</div>
+                <div className="fetch-data" />
             </div>
         );
     }
 }
 
-const mapStateToProps = ({ async: { data } }) => ({ data });
+const mapStateToProps = ({ async: { tickers, correlations } }) => ({
+    tickers,
+    correlations
+});
 const mapDispatchToProps = { fetchTickers, fetchCorrelations };
 export default connect(mapStateToProps, mapDispatchToProps)(Body);

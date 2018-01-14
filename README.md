@@ -17,6 +17,7 @@ https://bundlephobia.com
 
 - create api integration
 - create visualization - what kind of graphing could i use to represent this information, if any? 
+- add routing based on ticker chosen
 - implement code splitting time permitting.
 
 SVG files downloaded from here : 

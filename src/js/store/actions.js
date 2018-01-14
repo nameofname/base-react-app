@@ -5,9 +5,11 @@ export function dataLoading() {
     return { type: DATA_LOADING };
 }
 
-export const DATA_RECEIVED = 'DATA_RECEIVED';
-export function dataReceived(data) {
-    return { type: DATA_RECEIVED, payload: data };
+export const TICKERS_RECEIVED = 'TICKERS_RECEIVED';
+export const CORRELATIONS_RECEIVED = 'CORRELATIONS_RECEIVED';
+// util function for receiving different peices of information :
+export function dataReceived(type, payload) {
+    return { type, payload };
 }
 
 // TODO!!!!!!!! - implement error handling.
@@ -37,7 +39,8 @@ export function fetchCorrelations(tickerArr) {
     };
 }
 
+// TODO !!! implement full routing.
 export const UPDATE_URL = 'UPDATE_URL';
 export function updateUrl(uriRef) {
-    return { type: DATA_RECEIVED, payload: uriRef };
+    return { type: UPDATE_URL, payload: uriRef };
 }

@@ -1,8 +1,14 @@
-import { DATA_LOADING, DATA_RECEIVED } from './actions';
+import {
+    DATA_LOADING,
+    TICKERS_RECEIVED,
+    CORRELATIONS_RECEIVED
+} from './actions';
 import get from 'lodash.get';
 
 const defaultState = {
-    data: [{ title: 'No Data', link: '/' }]
+    tickers: [],
+    correlations: []
+    // TODO ! should i be storing tickers from correlations endpoint here as well ? data is redundant.
 };
 
 export default function uiReducer(state = defaultState, action) {
@@ -12,15 +18,16 @@ export default function uiReducer(state = defaultState, action) {
                 data: ['loading']
             });
 
-        case DATA_RECEIVED:
-            const dataArr = get(action.payload, 'data.children', []);
+        case TICKERS_RECEIVED:
+            const tickerArr = get(action.payload, 'tickers', []);
             return Object.assign({}, state, {
-                data: dataArr.map(o => {
-                    const obj = get(o, 'data', {});
-                    return Object.assign(obj, {
-                        link: `http://reddit.com/${obj.permalink}`
-                    });
-                })
+                tickers: tickerArr
+            });
+
+        case CORRELATIONS_RECEIVED:
+            const correlations = get(action.payload, 'correlations', []);
+            return Object.assign({}, state, {
+                correlations
             });
 
         default:
