@@ -23,7 +23,7 @@ export function fetchTickers() {
         dispatch(dataLoading());
         return fetch(`http://k-fe-practical.herokuapp.com/api/tickers/`)
             .then(response => response.json())
-            .then(json => dispatch(dataReceived(json)));
+            .then(json => dispatch(dataReceived(TICKERS_RECEIVED, json)));
     };
 }
 
@@ -35,7 +35,7 @@ export function fetchCorrelations(tickerArr) {
             `http://k-fe-practical.herokuapp.com/api/correlation/?${queryString}`
         )
             .then(response => response.json())
-            .then(json => dispatch(dataReceived(json)));
+            .then(json => dispatch(dataReceived(CORRELATIONS_RECEIVED, json)));
     };
 }
 

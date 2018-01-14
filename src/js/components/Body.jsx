@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchTickers, fetchCorrelations } from '../store/actions';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+
 // import router from '../router';
 
 class Body extends Component {
@@ -8,6 +11,9 @@ class Body extends Component {
         super();
         this.fetchTickers = this.fetchTickers.bind(this);
         this.fetchCorrelations = this.fetchCorrelations.bind(this);
+        this.state = {
+            selected: []
+        };
     }
 
     componentDidMount() {
@@ -18,22 +24,29 @@ class Body extends Component {
         this.props.fetchTickers();
     }
 
-    fetchCorrelations() {
-        // TODO ! connect to input.
-        this.props.fetchCorrelations(['AAPL', 'MSFT']);
+    fetchCorrelations(valueArr) {
+        const tickerArr = valueArr.map(({ value }) => value);
+        this.setState({
+            selected: tickerArr
+        });
+        this.props.fetchCorrelations(tickerArr);
     }
 
     render() {
         const { fetchCorrelations } = this;
         const { tickers, correlations } = this.props;
+        const { selected } = this.state;
+
         return (
             <div className="app-body">
-                <p>
-                    Welcome to my base react app. Everything is all set up for
-                    you to start coding.
-                </p>
-                <p>Choose from the following list of tickers</p>
-                <div>{tickers.map(ticker => <p>{ticker}</p>)}</div>
+                <p>Choose tickers :</p>
+                <Select
+                    name="tickers-select"
+                    value={selected}
+                    onChange={fetchCorrelations}
+                    options={tickers.map(t => ({ value: t, label: t }))}
+                    multi={true}
+                />
                 <div className="fetch-data" />
             </div>
         );
