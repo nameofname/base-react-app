@@ -63,7 +63,14 @@ class Body extends Component {
                     Compare
                 </button>
 
-                <div className="fetch-data" />
+                <div className="fetch-data">
+                    {correlations.map(({ pair, value }) => (
+                        <div>
+                            <p>{pair.join(' and ')}</p>
+                            <p>value : {value}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     }

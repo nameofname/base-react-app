@@ -25,7 +25,8 @@ export default function uiReducer(state = defaultState, action) {
             });
 
         case CORRELATIONS_RECEIVED:
-            const correlations = get(action.payload, 'correlations', []);
+            let correlations = get(action.payload, 'correlations', []);
+            correlations = correlations.filter(({ value }) => value !== 1);
             return Object.assign({}, state, {
                 correlations
             });
