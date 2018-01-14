@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchTickers, fetchCorrelations } from '../store/actions';
+import {
+    fetchTickers,
+    fetchCorrelations,
+    fetchAllCorrelations
+} from '../store/actions';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+
+const Loading = () => (
+    <div className="app-body">
+        <p>loading</p>
+    </div>
+);
 
 // import router from '../router';
 
@@ -14,10 +24,6 @@ class Body extends Component {
         this.state = {
             selected: []
         };
-    }
-
-    componentDidMount() {
-        this.props.fetchTickers();
     }
 
     updateSelected(valueArr) {
@@ -32,17 +38,26 @@ class Body extends Component {
         this.props.fetchCorrelations(selected);
     }
 
+    fetchAllCorrelations() {
+        this.props.fetchAllCorrelations(this.props.tickers);
+    }
+
     render() {
         const { updateSelected, fetchCorrelations } = this;
-        const { tickers, correlations } = this.props;
+        const {
+            tickers,
+            correlations,
+            allCorrelations,
+            fetchTickers
+        } = this.props;
         const { selected } = this.state;
 
         if (tickers.length === 0) {
-            return (
-                <div className="app-body">
-                    <p>loading</p>
-                </div>
-            );
+            fetchTickers();
+            return <Loading />;
+        } else if (allCorrelations.length === 0) {
+            this.fetchAllCorrelations();
+            return <Loading />;
         }
 
         return (
@@ -76,9 +91,16 @@ class Body extends Component {
     }
 }
 
-const mapStateToProps = ({ async: { tickers, correlations } }) => ({
+const mapStateToProps = ({
+    async: { tickers, correlations, allCorrelations }
+}) => ({
     tickers,
-    correlations
+    correlations,
+    allCorrelations
 });
-const mapDispatchToProps = { fetchTickers, fetchCorrelations };
+const mapDispatchToProps = {
+    fetchTickers,
+    fetchCorrelations,
+    fetchAllCorrelations
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Body);

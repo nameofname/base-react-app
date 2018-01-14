@@ -1,15 +1,22 @@
 import {
     DATA_LOADING,
     TICKERS_RECEIVED,
-    CORRELATIONS_RECEIVED
+    CORRELATIONS_RECEIVED,
+    ALL_CORRELATIONS_RECEIVED
 } from './actions';
 import get from 'lodash.get';
 
 const defaultState = {
     tickers: [],
-    correlations: []
+    correlations: [],
+    allCorrelations: []
     // TODO ! should i be storing tickers from correlations endpoint here as well ? data is redundant.
 };
+
+function cleanCorrelations(payload) {
+    let correlations = get(payload, 'correlations', []);
+    return correlations.filter(({ pair = [] }) => pair[0] !== pair[1]);
+}
 
 export default function uiReducer(state = defaultState, action) {
     switch (action.type) {
@@ -25,10 +32,13 @@ export default function uiReducer(state = defaultState, action) {
             });
 
         case CORRELATIONS_RECEIVED:
-            let correlations = get(action.payload, 'correlations', []);
-            correlations = correlations.filter(({ value }) => value !== 1);
             return Object.assign({}, state, {
-                correlations
+                correlations: cleanCorrelations(action.payload)
+            });
+
+        case ALL_CORRELATIONS_RECEIVED:
+            return Object.assign({}, state, {
+                allCorrelations: cleanCorrelations(action.payload)
             });
 
         default:
