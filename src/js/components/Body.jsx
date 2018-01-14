@@ -21,6 +21,13 @@ class Body extends Component {
                     Welcome to my base react app. Everything is all set up for
                     you to start coding.
                 </p>
+                <p>Here are a few links in the sample router :</p>
+                <div className="sample-links">
+                    <p>
+                        <a href="/one">Link one</a>
+                        <a href="/two">Link two</a>
+                    </p>
+                </div>
                 <p>Here's an arbitrary bit of text from the store :</p>
                 <div className="redux-data">
                     <p>{text}</p>
@@ -29,8 +36,8 @@ class Body extends Component {
                 <div className="fetch-data">
                     {data.map(({ title, link }, idx) => {
                         return (
-                            <a href={link}>
-                                <p key={idx}>{title}</p>
+                            <a key={idx} href={link}>
+                                <p>{title}</p>
                             </a>
                         );
                     })}
