@@ -9,7 +9,7 @@ import 'react-select/dist/react-select.css';
 class Body extends Component {
     constructor() {
         super();
-        this.fetchTickers = this.fetchTickers.bind(this);
+        this.updateSelected = this.updateSelected.bind(this);
         this.fetchCorrelations = this.fetchCorrelations.bind(this);
         this.state = {
             selected: []
@@ -17,25 +17,33 @@ class Body extends Component {
     }
 
     componentDidMount() {
-        this.fetchTickers();
-    }
-
-    fetchTickers() {
         this.props.fetchTickers();
     }
 
-    fetchCorrelations(valueArr) {
+    updateSelected(valueArr) {
         const tickerArr = valueArr.map(({ value }) => value);
         this.setState({
             selected: tickerArr
         });
-        this.props.fetchCorrelations(tickerArr);
+    }
+
+    fetchCorrelations() {
+        const { selected } = this.state;
+        this.props.fetchCorrelations(selected);
     }
 
     render() {
-        const { fetchCorrelations } = this;
+        const { updateSelected, fetchCorrelations } = this;
         const { tickers, correlations } = this.props;
         const { selected } = this.state;
+
+        if (tickers.length === 0) {
+            return (
+                <div className="app-body">
+                    <p>loading</p>
+                </div>
+            );
+        }
 
         return (
             <div className="app-body">
@@ -43,10 +51,18 @@ class Body extends Component {
                 <Select
                     name="tickers-select"
                     value={selected}
-                    onChange={fetchCorrelations}
+                    onChange={updateSelected}
                     options={tickers.map(t => ({ value: t, label: t }))}
                     multi={true}
                 />
+                <button
+                    className="button"
+                    type="submit"
+                    onClick={fetchCorrelations}
+                >
+                    Compare
+                </button>
+
                 <div className="fetch-data" />
             </div>
         );
