@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPolitics } from '../store/actions';
+import router from '../router';
 
 class Body extends Component {
     constructor() {
@@ -24,8 +25,24 @@ class Body extends Component {
                 <p>Here are a few links in the sample router :</p>
                 <div className="sample-links">
                     <p>
-                        <a href="/one">Link one</a>
-                        <a href="/two">Link two</a>
+                        <a
+                            href="/one"
+                            onClick={e => {
+                                e.preventDefault();
+                                router.resove({ pathname: '/one' });
+                            }}
+                        >
+                            Link one
+                        </a>
+                        <a
+                            href="/two"
+                            onClick={e => {
+                                e.preventDefault();
+                                router.resove({ pathname: '/two' });
+                            }}
+                        >
+                            Link two
+                        </a>
                     </p>
                 </div>
                 <p>Here's an arbitrary bit of text from the store :</p>

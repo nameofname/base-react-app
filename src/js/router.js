@@ -7,12 +7,14 @@ const routes = [
     { path: '(.*)', action: () => 'Not Found' }
 ];
 
-export default function router() {
-    const r = new UniversalRouter(routes);
+const router = new UniversalRouter(routes);
 
-    r.resolve({ pathname: '/one' }).then(result => {
-        console.log(result);
-    });
+// router.resolve({ pathname: '/one' }).then(result => {
+//     console.log(result);
+// });
+//
+// router.resolve({ pathname: '/two' }).then(result => {
+//     console.log(result);
+// });
 
-    return r;
-}
+export default router;
