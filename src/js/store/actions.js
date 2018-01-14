@@ -24,3 +24,8 @@ export function fetchPolitics() {
             .then(json => dispatch(dataReceived(json)));
     };
 }
+
+export const UPDATE_URL = 'UPDATE_URL';
+export function updateUrl(uriRef) {
+    return { type: DATA_RECEIVED, payload: uriRef };
+}

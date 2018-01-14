@@ -1,28 +1,33 @@
 // use main.js to work around https://github.com/kriasoft/universal-router/issues/127
 import UniversalRouter from 'universal-router/browser.js';
 import createHistory from 'history/createBrowserHistory';
+import { updateUrl } from './store/actions';
 const history = createHistory();
+
+function navigate(path, search) {
+    const url = `${path}${search ? '?' + search : ''}`;
+    history.push(url, { some: 'state' });
+    updateUrl(url);
+    return url;
+}
 
 const routes = [
     {
         path: '/one',
         action: () => {
-            history.push('/one', { some: 'state' });
-            return 'one';
+            return navigate('/one');
         }
     },
     {
         path: '/two',
         action: () => {
-            history.push('/two', { some: 'state' });
-            return 'two';
+            return navigate('/two');
         }
     },
     {
         path: '(.*)',
         action: () => {
-            history.push('/not-found', { some: 'state' });
-            return 'not-found';
+            return navigate('/not-found');
         }
     }
 ];
