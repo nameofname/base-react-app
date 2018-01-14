@@ -16,7 +16,7 @@ class TargetedComparison extends Component {
     }
 
     updateSelected(valueArr) {
-        const tickerArr = valueArr.map(({ value }) => value);
+        const tickerArr = valueArr.map(({ value }) => value).slice(0, 10);
         this.setState({
             selected: tickerArr
         });
@@ -34,7 +34,7 @@ class TargetedComparison extends Component {
 
         return (
             <div>
-                <p>Choose tickers :</p>
+                <p>Choose up to 10 stock tickers :</p>
                 <Select
                     name="tickers-select"
                     value={selected}
