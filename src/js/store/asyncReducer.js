@@ -15,7 +15,17 @@ const defaultState = {
 
 function cleanCorrelations(payload) {
     let correlations = get(payload, 'correlations', []);
-    return correlations.filter(({ pair = [] }) => pair[0] !== pair[1]);
+    return correlations
+        .filter(({ pair = [] }) => pair[0] !== pair[1])
+        .sort(({ value: valueA }, { value: valueB }) => {
+            if (valueA < valueB) {
+                return -1;
+            }
+            if (valueA > valueB) {
+                return 1;
+            }
+            return 0;
+        });
 }
 
 export default function uiReducer(state = defaultState, action) {

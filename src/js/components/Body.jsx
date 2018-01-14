@@ -5,6 +5,7 @@ import {
     fetchCorrelations,
     fetchAllCorrelations
 } from '../store/actions';
+import AllCorrelations from './AllCorrelations';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
@@ -62,14 +63,17 @@ class Body extends Component {
 
         return (
             <div className="app-body">
-                <p>Choose tickers :</p>
-                <Select
-                    name="tickers-select"
-                    value={selected}
-                    onChange={updateSelected}
-                    options={tickers.map(t => ({ value: t, label: t }))}
-                    multi={true}
-                />
+                <div>
+                    <p>Choose tickers :</p>
+                    <Select
+                        name="tickers-select"
+                        value={selected}
+                        onChange={updateSelected}
+                        options={tickers.map(t => ({ value: t, label: t }))}
+                        multi={true}
+                    />
+                </div>
+
                 <button
                     className="button"
                     type="submit"
@@ -86,6 +90,8 @@ class Body extends Component {
                         </div>
                     ))}
                 </div>
+
+                <AllCorrelations />
             </div>
         );
     }
