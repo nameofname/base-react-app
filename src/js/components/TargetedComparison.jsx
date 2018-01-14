@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCorrelations } from '../store/actions';
+import ComparisonTable from './ComparisonTable';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
@@ -50,14 +51,7 @@ class TargetedComparison extends Component {
                     Compare
                 </button>
 
-                <div className="fetch-data">
-                    {correlations.map(({ pair, value }) => (
-                        <div>
-                            <p>{pair.join(' and ')}</p>
-                            <p>value : {value}</p>
-                        </div>
-                    ))}
-                </div>
+                <ComparisonTable correlations={correlations} />
             </div>
         );
     }

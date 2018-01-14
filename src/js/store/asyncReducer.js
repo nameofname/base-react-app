@@ -18,10 +18,10 @@ function cleanCorrelations(payload) {
     return correlations
         .filter(({ pair = [] }) => pair[0] !== pair[1])
         .sort(({ value: valueA }, { value: valueB }) => {
-            if (valueA < valueB) {
+            if (valueA > valueB) {
                 return -1;
             }
-            if (valueA > valueB) {
+            if (valueA < valueB) {
                 return 1;
             }
             return 0;
