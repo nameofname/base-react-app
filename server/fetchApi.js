@@ -2,6 +2,7 @@
 
 const fetch = require('node-fetch');
 const serviceHost = process.env.NODE_SERVICE_HOST || 'http://k-fe-practical.herokuapp.com';
+const logger = require('./logger');
 
 const cache = {};
 const ttl = 5000; // 5 second TTL
@@ -15,12 +16,13 @@ function cacheGet(resource, query) {
 
     if (cached) {
         const { time, value } = cached;
-        if ((currTime - time) > ttl) {
-            return null;
+        if ((currTime - time) < ttl) {
+            logger.info(`cache hit for ${cacheKey}`);
+            return value;
         }
-        return value;
     }
 
+    logger.info(`cache miss for ${cacheKey}`);
     return null;
 }
 
@@ -38,7 +40,7 @@ module.exports = function fetchApi(resource, query) {
     const cached = cacheGet(resource, query);
 
     if (cached) {
-        return cached;
+        return Promise.resolve(cached);
     }
 
     return fetch(`${serviceHost}/api/${resource}/?${query}`)
