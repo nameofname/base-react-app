@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fetchApi = require('./fetchApi');
+const logger = require('./logger');
 const port = 9001;
 
 module.exports = function startServer() {
@@ -21,7 +22,7 @@ module.exports = function startServer() {
             .then(r => res.json(r));
     });
 
-    console.log(`listening on port ${port}`)
+    logger.info(`listening on port ${port} ${JSON.stringify(process.env, null, 4)}`);
     app.listen(port);
 
     return app;

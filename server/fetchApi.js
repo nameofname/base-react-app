@@ -5,7 +5,7 @@ const serviceHost = process.env.NODE_SERVICE_HOST || 'http://k-fe-practical.hero
 const logger = require('./logger');
 
 const cache = {};
-const ttl = 5000; // 5 second TTL
+const ttl = process.env.NODE_TTL;
 
 
 function cacheGet(resource, query) {
@@ -17,12 +17,12 @@ function cacheGet(resource, query) {
     if (cached) {
         const { time, value } = cached;
         if ((currTime - time) < ttl) {
-            logger.info(`cache hit for ${cacheKey}`);
+            logger.trace(`cache hit for ${cacheKey}`);
             return value;
         }
     }
 
-    logger.info(`cache miss for ${cacheKey}`);
+    logger.trace(`cache miss for ${cacheKey}`);
     return null;
 }
 
