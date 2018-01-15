@@ -8,14 +8,18 @@ export const ALL_CORRELATIONS_RECEIVED = 'ALL_CORRELATIONS_RECEIVED';
 export const DATA_ERROR = 'DATA_ERROR';
 export const UPDATE_URL = 'UPDATE_URL';
 
+const serviceHost =
+    process.env.REACT_APP_CLIENT_SERVICE_HOST ||
+    'http://k-fe-practical.herokuapp.com';
+
 /* Helpers : */
 function fetchCorrelationsHelper(dispatch, tickerArr) {
     // shared code for fetching correlations :
     dispatch(dataLoading());
     const queryString = tickerArr.map(str => `tickers=${str}`).join('&');
-    return fetch(
-        `http://k-fe-practical.herokuapp.com/api/correlation/?${queryString}`
-    ).then(response => response.json());
+    return fetch(`${serviceHost}/api/correlation/?${queryString}`).then(
+        response => response.json()
+    );
 }
 
 function dataReceived(type, payload) {
@@ -36,7 +40,7 @@ export function dataError(data) {
 export function fetchTickers() {
     return dispatch => {
         dispatch(dataLoading());
-        return fetch(`http://k-fe-practical.herokuapp.com/api/tickers/`)
+        return fetch(`${serviceHost}/api/tickers/`)
             .then(response => response.json())
             .then(json => dispatch(dataReceived(TICKERS_RECEIVED, json)));
     };
