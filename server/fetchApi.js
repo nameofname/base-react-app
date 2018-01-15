@@ -3,14 +3,14 @@
 const fetch = require('node-fetch');
 const serviceHost = process.env.NODE_SERVICE_HOST || 'http://k-fe-practical.herokuapp.com';
 const logger = require('./logger');
+const qs = require('querystring');
 
 const cache = {};
 const ttl = process.env.NODE_TTL;
 
 
-function cacheGet(resource, query) {
+function cacheGet(cacheKey) {
 
-    const cacheKey = `${resource}-${query}`;
     const cached = cache[cacheKey];
     const currTime = Date.now();
 
@@ -23,29 +23,33 @@ function cacheGet(resource, query) {
     }
 
     logger.trace(`cache miss for ${cacheKey}`);
+    cache[cacheKey] = null;
     return null;
 }
 
-function cacheSet(resource, query, value) {
+function cacheSet(cacheKey, json) {
 
-    const cacheKey = `${resource}-${query}`;
+    logger.trace(`populating cache for ${cacheKey}`);
     const time = Date.now();
-    cache[cacheKey] = { time, value };
+    cache[cacheKey] = { time, value: json };
 
-    return cache[cacheKey];
+    return cache[cacheKey].value;
 }
 
 module.exports = function fetchApi(resource, query) {
 
-    const cached = cacheGet(resource, query);
+    const queryString = qs.stringify(query);
+    const url = `${serviceHost}/api/${resource}/?${queryString}`;
+    logger.info(`fetching resource ${url}`);
+    const cached = cacheGet(url);
 
     if (cached) {
         return Promise.resolve(cached);
     }
 
-    return fetch(`${serviceHost}/api/${resource}/?${query}`)
+    return fetch(url)
         .then(response => response.json())
         .then(json => {
-            return cacheSet(resource, query, json);
+            return cacheSet(url, json);
         });
 };

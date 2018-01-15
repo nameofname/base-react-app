@@ -16,13 +16,11 @@ module.exports = function startServer() {
 
     app.get('/api/:resource', function (req, res) {
         const { resource } = req.params;
-        const { tickers } = req.query;
-
-        fetchApi(resource, tickers)
+        fetchApi(resource, req.query)
             .then(r => res.json(r));
     });
 
-    logger.info(`listening on port ${port} ${JSON.stringify(process.env, null, 4)}`);
+    logger.info(`listening on port ${port}}`);
     app.listen(port);
 
     return app;
