@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchTickers, fetchAllCorrelations } from '../store/actions';
-import AllCorrelations from './AllCorrelations';
-import TargetedComparison from './TargetedComparison';
+import { fetchTickers, fetchAllCorrelations } from '../redux/actions';
 
 const Loading = () => (
     <div className="app-body">
         <p>loading</p>
     </div>
 );
-
-// import router from '../router';
 
 class Body extends Component {
     render() {
