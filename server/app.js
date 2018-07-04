@@ -10,7 +10,16 @@ module.exports = function startServer() {
     app.use(express.static(path.join(__dirname, '../build')));
 
     app.get('/', function (req, res) {
+        logger.info('Request Info : home route');
         res.sendFile(path.join(__dirname, '../build', 'index.html'));
+    });
+
+    app.get('/fakeApi', function (req, res) {
+        logger.info('Request Info : fakeApi');
+        res.json({
+            id: req.query.id,
+            text: `This is the content you sent, ${req.query.id}`
+        });
     });
 
     logger.info(`listening on port ${port}}`);

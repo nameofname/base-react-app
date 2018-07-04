@@ -20,7 +20,7 @@ export function dataError(error) {
     return { type: 'DATA_ERROR', error };
 }
 
-export function fetchExample() {
+export function fetchExample(string) {
     return dispatch => {
         fetchHelper(dispatch)
             .then(json => dispatch(dataReceived('EXAMPLE_RECEIVED', json)))

@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchExample } from '../redux/actions';
-
-const Loading = () => (
-    <div className="app-body">
-        <p>loading</p>
-    </div>
-);
+import { Loading } from './Loading';
+import { Error } from './Error';
+import { ExampleContent } from './ExampleContent';
 
 class Body extends Component {
     render() {
-        return (
-            <div className="app-body">
-                <p>heer is the inside of your app.</p>
-            </div>
-        );
+        const { isLoading, errorMessages } = this.props;
+        let Body;
+
+        if (isLoading) {
+            Body = <Loading />;
+        } else if (errorMessages && errorMessages.length) {
+            Body = <Error messages={errorMessages} />;
+        } else {
+            Body = <ExampleContent />;
+        }
+
+        return <div className="app-body">{Body}</div>;
     }
 }
 
 const mapStateToProps = ({
-    async: { exampleData, isLoading, errorMessages }
-}) => ({ exampleData, isLoading, errorMessages });
+    async: { ExampleContent, isLoading, errorMessages }
+}) => ({ ExampleContent, isLoading, errorMessages });
 
 const mapDispatchToProps = {
     fetchExample

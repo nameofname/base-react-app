@@ -31,7 +31,8 @@
     "precommit": "lint-staged",
     "prettier": "./node_modules/.bin/prettier --tab-width 4 --single-quote --write \"src/**/*.{js,jsx}\"",
     "server": "node index.js",
-    "start": "react-scripts start",
+    "dev": "node index.js && react-scripts start",
+    "start": "node index.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
