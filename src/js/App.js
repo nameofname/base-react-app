@@ -5,9 +5,6 @@ import Header from './components/Header';
 import Body from './components/Body';
 import store from './redux/store';
 
-/**
- * App class does basic routing based on the current state in history reducer. ????
- */
 class App extends Component {
     render() {
         return (

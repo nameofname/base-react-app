@@ -1,6 +1,8 @@
 import fetch from 'cross-fetch';
+import Router from '../router/Router';
 
 const serviceHost = process.env.REACT_APP_SERVICE_HOST;
+const router = new Router();
 
 // another example can be found at : https://www.reddit.com/r/politics.json
 function fetchHelper(dispatch, uri) {
@@ -33,7 +35,11 @@ export function dataError(error) {
 export function fetchExample(string) {
     return dispatch => {
         fetchHelper(dispatch, `/api/fakeApi?id=${string}`)
-            .then(json => dispatch(dataReceived('EXAMPLE_RECEIVED', json)))
+            .then(json => {
+                dispatch(dataReceived('EXAMPLE_RECEIVED', json));
+                // TODO ! areal route.
+                router.navigate('/derping/hrrrrd');
+            })
             .catch(err => dispatch(dataError(err)));
     };
 }
