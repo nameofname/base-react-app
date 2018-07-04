@@ -15,7 +15,7 @@ function startServer() {
                 id: req.query.id,
                 text: `This is the content you sent: ${req.query.id}`
             });
-        }, 1000); // OMG SO SLLLOOOOOWWWW!
+        }, 300); // OMG SO SLLLOOOOOWWWW!
     });
 
     logger.info(`API listening on port ${port}`);

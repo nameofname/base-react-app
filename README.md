@@ -6,19 +6,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - redux : https://redux.js.org/
 - redux-thunk for async actions (API integration) : https://github.com/gaearon/redux-thunk
 - prettier : https://github.com/prettier/prettier 
-- Routing with universal-router : https://github.com/kriasoft/universal-router
+- Routing with ampresand-router
+- SVG files downloaded from here : https://www.flaticon.com
 
 
 ## Help for evaluating cost of additional node modules : 
 
 https://bundlephobia.com
 
-## TODO :  
+## Running this app
 
-- create api integration
-- create visualization - what kind of graphing could i use to represent this information, if any? 
-- add routing based on ticker chosen
-- implement code splitting time permitting.
+You have to run the fake api and the client separately, in 2 separate terminals do this : 
 
-SVG files downloaded from here : 
-https://www.flaticon.com
+- yarn dev
+- yarn api
