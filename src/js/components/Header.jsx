@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import lightning from '../../img/lightning.svg';
 import wink from '../../img/wink.svg';
 
 class Header extends Component {

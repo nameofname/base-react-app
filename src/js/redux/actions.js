@@ -1,10 +1,10 @@
 import fetch from 'cross-fetch';
 
-const serviceHost = process.env.REACT_APP_CLIENT_SERVICE_HOST;
+const serviceHost = process.env.REACT_APP_SERVICE_HOST;
 
 function fetchHelper(dispatch, uri) {
     dispatch(dataLoading());
-    return fetch(`${serviceHost}/${uri}`).then(r => r.json());
+    return fetch(`${serviceHost}${uri}`).then(r => r.json());
 }
 
 function dataReceived(type, payload) {
@@ -22,7 +22,7 @@ export function dataError(error) {
 
 export function fetchExample(string) {
     return dispatch => {
-        fetchHelper(dispatch)
+        fetchHelper(dispatch, `/api/fakeApi?id=${string}`)
             .then(json => dispatch(dataReceived('EXAMPLE_RECEIVED', json)))
             .catch(err => dispatch(dataError(err)));
     };
