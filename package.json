@@ -10,6 +10,7 @@
     "lint-staged": "^6.0.0",
     "lodash.get": "^4.4.2",
     "node-fetch": "^1.7.3",
+    "pint-sized-logger": "^1.0.3",
     "prettier": "^1.10.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

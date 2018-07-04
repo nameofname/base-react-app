@@ -13,25 +13,10 @@ const Loading = () => (
 // import router from '../router';
 
 class Body extends Component {
-    fetchAllCorrelations() {
-        this.props.fetchAllCorrelations(this.props.tickers);
-    }
-
     render() {
-        const { tickers, allCorrelations, fetchTickers } = this.props;
-
-        if (tickers.length === 0) {
-            fetchTickers();
-            return <Loading />;
-        } else if (allCorrelations.length === 0) {
-            this.fetchAllCorrelations();
-            return <Loading />;
-        }
-
         return (
             <div className="app-body">
-                <TargetedComparison />
-                <AllCorrelations />
+                <p>heer is the inside of your app.</p>
             </div>
         );
     }
