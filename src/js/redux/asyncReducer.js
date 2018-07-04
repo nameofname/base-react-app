@@ -14,6 +14,11 @@ export function asyncReducer(state = defaultState, action) {
                 isLoading: true
             });
 
+        case 'DONE_LOADING':
+            return Object.assign({}, state, {
+                isLoading: false
+            });
+
         case 'DATA_ERROR':
             return {
                 errorMessages: [

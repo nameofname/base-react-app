@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchExample } from '../redux/actions';
+import get from 'lodash.get';
 
 class ExampleContentComponent extends Component {
     constructor() {
@@ -9,7 +10,7 @@ class ExampleContentComponent extends Component {
     }
 
     fetchExample(e) {
-        this.props.fetchExample(e.target.value);
+        this.props.fetchExample(encodeURIComponent(e.target.value));
     }
 
     render() {
@@ -17,7 +18,7 @@ class ExampleContentComponent extends Component {
             <React.Fragment>
                 <p>here is the inside of your app...</p>
                 <input type="text" onBlur={this.fetchExample} />
-                <p>{this.props.exampleData}</p>
+                <p>{get(this, 'props.exampleData.text')}</p>
             </React.Fragment>
         );
     }
