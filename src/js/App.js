@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import '../css/App.css';
 import Header from './components/Header';
 import Body from './components/Body';
-import store from './store/store';
+import store from './redux/store';
 
 /**
  * App class does basic routing based on the current state in history reducer. ????

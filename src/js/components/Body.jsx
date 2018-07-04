@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchTickers, fetchAllCorrelations } from '../redux/actions';
+import { fetchExample } from '../redux/actions';
 
 const Loading = () => (
     <div className="app-body">
@@ -19,14 +19,11 @@ class Body extends Component {
 }
 
 const mapStateToProps = ({
-    async: { tickers, correlations, allCorrelations }
-}) => ({
-    tickers,
-    correlations,
-    allCorrelations
-});
+    async: { exampleData, isLoading, errorMessages }
+}) => ({ exampleData, isLoading, errorMessages });
+
 const mapDispatchToProps = {
-    fetchTickers,
-    fetchAllCorrelations
+    fetchExample
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Body);
