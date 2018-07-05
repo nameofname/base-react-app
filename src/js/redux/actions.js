@@ -54,7 +54,10 @@ export function fetchExample(string) {
             // debugger;
             const image = get(json, 'input_payload.image');
             const fields = get(json, 'input_payload.fields');
-            dispatch(dataReceived('HS_LOADED', { image, fields }));
+            const template_name = get(json, 'input_payload.template_name');
+            dispatch(
+                dataReceived('HS_LOADED', { image, fields, template_name })
+            );
         });
     };
 }

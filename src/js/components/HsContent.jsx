@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import get from 'lodash.get';
+import { DataInput } from './DataInput';
+import { DocImage } from './DocImage';
+const fieldStyles = {
+    float: 'left'
+};
 
 class HsContentComponent extends Component {
     render() {
-        const { image, fields } = this.props || {};
+        const { image, fields, template_name } = this.props || {};
 
         return (
             <React.Fragment>
-                <img
-                    src={image}
-                    alt="form image..."
-                    style={{
-                        float: 'left',
-                        maxWidth: '300px'
-                    }}
-                />
-                {fields.map(({ type, uuid, name, bounding_box }) => (
-                    <p>{type}</p>
-                ))}
+                <h1>{template_name}</h1>
+                <DocImage image={image} fields={fields} />
+                <div style={fieldStyles}>
+                    {fields.map((field, idx) => (
+                        <DataInput {...field} key={idx} />
+                    ))}
+                    <div>
+                        <button>Submit</button>
+                    </div>
+                </div>
             </React.Fragment>
         );
     }

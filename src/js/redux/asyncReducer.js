@@ -2,6 +2,7 @@ const defaultState = {
     isLoading: false,
     image: null,
     fields: [],
+    template_name: [],
     errorMessages: []
 };
 
@@ -31,7 +32,8 @@ export function asyncReducer(state = defaultState, action) {
             return {
                 ...state,
                 image: action.payload.image,
-                fields: action.payload.fields
+                fields: action.payload.fields,
+                template_name: action.payload.template_name
             };
 
         default:
