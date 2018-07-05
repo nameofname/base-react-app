@@ -13,7 +13,12 @@ class Body extends Component {
         if (isLoading) {
             Body = <Loading />;
         } else if (errorMessages && errorMessages.length) {
-            Body = <Error messages={errorMessages} />;
+            Body = (
+                <React.Fragment>
+                    <Error messages={errorMessages} />
+                    <ExampleContent />
+                </React.Fragment>
+            );
         } else {
             Body = <ExampleContent />;
         }

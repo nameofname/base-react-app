@@ -6,30 +6,32 @@ const defaultState = {
     errorMessages: []
 };
 
-// TODO !!!
 export function asyncReducer(state = defaultState, action) {
     switch (action.type) {
         case 'DATA_LOADING':
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 isLoading: true
-            });
+            };
 
         case 'DONE_LOADING':
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 isLoading: false
-            });
+            };
 
         case 'DATA_ERROR':
+            console.log('error', action.payload);
             return {
-                errorMessages: [
-                    'TODO ! I want to do this better can i use object spread?'
-                ]
+                ...state,
+                errorMessages: [action.payload]
             };
 
         case 'EXAMPLE_RECEIVED':
-            return Object.assign({}, state, {
+            return {
+                ...state,
                 exampleData: action.payload
-            });
+            };
 
         default:
             return state;

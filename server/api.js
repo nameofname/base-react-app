@@ -10,6 +10,7 @@ function startServer() {
     app.get('/api/fakeOne', function (req, res) {
         logger.info('Request Info : fakeOne with ', req.query.id);
         res.header("Access-Control-Allow-Origin", "*");
+        throw new Error('shit is totally effd')
         setTimeout(() => {
             res.json({
                 id: req.query.id,

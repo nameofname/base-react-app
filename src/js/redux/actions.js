@@ -27,9 +27,20 @@ function doneLoading() {
     return { type: 'DONE_LOADING' };
 }
 
-// TODO!!!!!!!! - implement error handling.
 export function dataError(error) {
-    return { type: 'DATA_ERROR', error };
+    let payload;
+
+    if (typeof error === 'string') {
+        payload = error;
+    } else {
+        try {
+            payload = error.message;
+        } catch (e) {
+            payload = 'A service error occurred';
+        }
+    }
+
+    return { type: 'DATA_ERROR', payload };
 }
 
 export function fetchExample(string) {
@@ -39,6 +50,9 @@ export function fetchExample(string) {
                 dispatch(dataReceived('EXAMPLE_RECEIVED', json));
                 router.navigate(json.id);
             })
-            .catch(err => dispatch(dataError(err)));
+            .catch(err => {
+                dispatch(doneLoading());
+                dispatch(dataError(err));
+            });
     };
 }
