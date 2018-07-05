@@ -18,14 +18,14 @@ class ExampleContentComponent extends Component {
             <React.Fragment>
                 <p>here is the inside of your app...</p>
                 <input type="text" onBlur={this.fetchExample} />
-                <p>{get(this, 'props.exampleData.text')}</p>
+                <p>{get(this, 'props.exampleOne.text')}</p>
             </React.Fragment>
         );
     }
 }
 
-const mapStateToProps = ({ async: { exampleData } }) => ({
-    exampleData
+const mapStateToProps = ({ async: { exampleOne } }) => ({
+    exampleOne
 });
 const mapDispatchToProps = { fetchExample };
 

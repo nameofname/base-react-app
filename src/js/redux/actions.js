@@ -47,7 +47,21 @@ export function fetchExample(string) {
     return dispatch => {
         fetchHelper(dispatch, `/api/fakeOne?id=${string}`)
             .then(json => {
-                dispatch(dataReceived('EXAMPLE_RECEIVED', json));
+                dispatch(dataReceived('EXAMPLE_ONE', json));
+                router.navigate(json.id);
+            })
+            .catch(err => {
+                dispatch(doneLoading());
+                dispatch(dataError(err));
+            });
+    };
+}
+
+export function fetchExampleTwo(string) {
+    return dispatch => {
+        fetchHelper(dispatch, `/api/fakeOne?id=${string}`)
+            .then(json => {
+                dispatch(dataReceived('EXAMPLE_ONE', json));
                 router.navigate(json.id);
             })
             .catch(err => {

@@ -1,8 +1,7 @@
-// import get from 'lodash.get';
-
 const defaultState = {
     isLoading: false,
-    exampleData: null,
+    exampleOne: null,
+    exampleTwo: null,
     errorMessages: []
 };
 
@@ -27,10 +26,16 @@ export function asyncReducer(state = defaultState, action) {
                 errorMessages: [action.payload]
             };
 
-        case 'EXAMPLE_RECEIVED':
+        case 'EXAMPLE_ONE':
             return {
                 ...state,
-                exampleData: action.payload
+                exampleOne: action.payload
+            };
+
+        case 'EXAMPLE_TWO':
+            return {
+                ...state,
+                exampleTwo: action.payload
             };
 
         default:
