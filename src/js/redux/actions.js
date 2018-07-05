@@ -12,6 +12,10 @@ function fetchHelper(dispatch, uri) {
         .then(json => {
             dispatch(doneLoading());
             return json;
+        })
+        .catch(err => {
+            dispatch(doneLoading());
+            dispatch(dataError(err));
         });
 }
 
@@ -45,28 +49,17 @@ export function dataError(error) {
 
 export function fetchExample(string) {
     return dispatch => {
-        fetchHelper(dispatch, `/api/fakeOne?id=${string}`)
-            .then(json => {
-                dispatch(dataReceived('EXAMPLE_ONE', json));
-                router.navigate(json.id);
-            })
-            .catch(err => {
-                dispatch(doneLoading());
-                dispatch(dataError(err));
-            });
+        fetchHelper(dispatch, `/api/fakeOne?id=${string}`).then(json => {
+            dispatch(dataReceived('EXAMPLE_ONE', json));
+            router.navigate(json.id);
+        });
     };
 }
 
 export function fetchExampleTwo(string) {
     return dispatch => {
-        fetchHelper(dispatch, `/api/fakeOne?id=${string}`)
-            .then(json => {
-                dispatch(dataReceived('EXAMPLE_ONE', json));
-                router.navigate(json.id);
-            })
-            .catch(err => {
-                dispatch(doneLoading());
-                dispatch(dataError(err));
-            });
+        fetchHelper(dispatch, `/api/fakeTwo`).then(json => {
+            dispatch(dataReceived('EXAMPLE_TWO', json));
+        });
     };
 }
