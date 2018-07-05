@@ -1,7 +1,7 @@
 const defaultState = {
     isLoading: false,
-    exampleOne: null,
-    exampleTwo: null,
+    image: null,
+    fields: [],
     errorMessages: []
 };
 
@@ -26,16 +26,12 @@ export function asyncReducer(state = defaultState, action) {
                 errorMessages: [action.payload]
             };
 
-        case 'EXAMPLE_ONE':
+        case 'HS_LOADED':
+            console.log('action.payload', action.payload);
             return {
                 ...state,
-                exampleOne: action.payload
-            };
-
-        case 'EXAMPLE_TWO':
-            return {
-                ...state,
-                exampleTwo: action.payload
+                image: action.payload.image,
+                fields: action.payload.fields
             };
 
         default:

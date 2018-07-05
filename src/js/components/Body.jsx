@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import { fetchExample } from '../redux/actions';
 import { Loading } from './Loading';
 import { Error } from './Error';
-import { ExampleContent } from './ExampleContent';
+import { HsContent } from './HsContent';
 
 class Body extends Component {
+    componentDidMount() {
+        this.props.fetchExample();
+    }
+
     render() {
         const { isLoading, errorMessages } = this.props;
         let Body;
@@ -16,11 +20,11 @@ class Body extends Component {
             Body = (
                 <React.Fragment>
                     <Error messages={errorMessages} />
-                    <ExampleContent />
+                    <HsContent />
                 </React.Fragment>
             );
         } else {
-            Body = <ExampleContent />;
+            Body = <HsContent />;
         }
 
         return <div className="app-body">{Body}</div>;

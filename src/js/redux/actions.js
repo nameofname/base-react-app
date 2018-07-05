@@ -1,13 +1,12 @@
+import get from 'lodash.get';
 import fetch from 'cross-fetch';
-import { Router } from '../router/Router';
 
-const serviceHost = process.env.REACT_APP_SERVICE_HOST;
-const router = new Router();
+// const serviceHost = process.env.REACT_APP_SERVICE_HOST;
 
-// another example can be found at : https://www.reddit.com/r/politics.json
+// US URL: https://raw.githubusercontent.com/hyperscience/interview-problems/master/taskRequest_1.json
 function fetchHelper(dispatch, uri) {
     dispatch(dataLoading());
-    return fetch(`${serviceHost}${uri}`)
+    return fetch(uri)
         .then(r => r.json())
         .then(json => {
             dispatch(doneLoading());
@@ -47,19 +46,15 @@ export function dataError(error) {
     return { type: 'DATA_ERROR', payload };
 }
 
+const hsUrl =
+    'https://raw.githubusercontent.com/hyperscience/interview-problems/master/taskRequest_1.json';
 export function fetchExample(string) {
     return dispatch => {
-        fetchHelper(dispatch, `/api/fakeOne?id=${string}`).then(json => {
-            dispatch(dataReceived('EXAMPLE_ONE', json));
-            router.navigate(json.id);
-        });
-    };
-}
-
-export function fetchExampleTwo(string) {
-    return dispatch => {
-        fetchHelper(dispatch, `/api/fakeTwo`).then(json => {
-            dispatch(dataReceived('EXAMPLE_TWO', json));
+        fetchHelper(dispatch, hsUrl).then(json => {
+            // debugger;
+            const image = get(json, 'input_payload.image');
+            const fields = get(json, 'input_payload.fields');
+            dispatch(dataReceived('HS_LOADED', { image, fields }));
         });
     };
 }
