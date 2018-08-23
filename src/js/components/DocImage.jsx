@@ -1,10 +1,10 @@
 import React from 'react';
 
-const totalWidth = '600';
-const totalHeight = '776.5';
+const totalWidth = 600;
+const totalHeight = 776.5;
 const pos = (total, n) => `${n * total}px`;
 const perc = (total, a, b) => {
-    const res = `${total * Math.abs(b - a)}px`;
+    const res = `${total * (b - a)}px`;
     console.log(res, total, a, b);
     return res;
 };
